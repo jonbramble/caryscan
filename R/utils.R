@@ -5,7 +5,7 @@
 #' @export
 write_mean <- function(df,path){
   dout <- df[,c('Wavelength','fluo_mean')]
-  write.csv(dout,path,row.names = FALSE)
+  utils::write.csv(dout,path,row.names = FALSE)
 }
 
 #' melts data in preparation for ggplot2 plots

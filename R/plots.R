@@ -8,7 +8,7 @@
 #' @export
 
 plot_all <- function(df,scans=15){
-  matplot(df[,'Wavelength'],df[,2:scans+1],type=c("l"),xlab="Wavelength (nm)",ylab="Intensity (a.u)")
+  graphics::matplot(df[,'Wavelength'],df[,2:scans+1],type=c("l"),xlab="Wavelength (nm)",ylab="Intensity (a.u)")
 }
 
 #' plot the averaged data
@@ -21,7 +21,7 @@ plot_all <- function(df,scans=15){
 #' @export
 
 plot_mean <- function(df, mean_name){
-  matplot(df[,'Wavelength'],df[,mean_name],type=c("l"),xlab="Wavelength (nm)",ylab="Intensity (a.u)")
+  graphics::matplot(df[,'Wavelength'],df[,mean_name],type=c("l"),xlab="Wavelength (nm)",ylab="Intensity (a.u)")
 }
 
 #' ggplot all the data
