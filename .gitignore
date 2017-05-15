@@ -1,0 +1,21 @@
+.Rhistory
+
+# Session Data files
+.RData
+
+# Test csv files
+*.csv
+
+# R Studio files
+.Rproj.user/
+
+# R CMD builds
+/*.tar.gz
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+
+# knitr and R markdown default cache directories
+/*_cache/
+/cache/
