@@ -7,7 +7,7 @@
 #' @param skip remove header lines
 #' @param nlines number of scan points
 #' @param scans number of scans
-#' @return data.frame containing data labled R1..RN where N is the number of scans
+#' @return data.frame containing data labelled R1..RN where N is the number of scans
 #' @export
 import_data <- function(path,filename,skip=2,nlines=121,scans=15) {
   full_path <- file.path(path,filename)

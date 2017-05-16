@@ -31,7 +31,7 @@ lognormal <- function(lambda,c,h,w,b) {
 #' @param b asymmetry
 #' @export
 add_lognorm_fit <- function(df,c,h,w,b){
-  sapply(df$Wavelength,lognormal, c,h,w,b)
+  sapply(df[,'Wavelength'],lognormal, c,h,w,b)
 }
 
 
