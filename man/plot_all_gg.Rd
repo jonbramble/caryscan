@@ -4,12 +4,10 @@
 \alias{plot_all_gg}
 \title{ggplot all the data}
 \usage{
-plot_all_gg(df, mean_name = "fluo_mean")
+plot_all_gg(df, scans = 15)
 }
 \arguments{
 \item{df}{dataframe of spectroscopy data imported using caryscan package}
-
-\item{mean_name}{the name of the column containing the averaged data}
 }
 \value{
 ggplot2 plot object

@@ -29,12 +29,13 @@ plot_mean <- function(df, mean_name){
 #' This function prepares a ggplot2 plot of all the spectroscopy data
 #'
 #' @param df dataframe of spectroscopy data imported using caryscan package
-#' @param mean_name the name of the column containing the averaged data
 #' @return ggplot2 plot object
 #' @export
-plot_all_gg <- function(df,mean_name='fluo_mean'){
-  mdat<-melt_data(df)
-  p <- ggplot2::ggplot(subset(mdat,Scan!='fluo_mean'),ggplot2::aes(x=Wavelength,y=Em,group=Scan,color=Scan)) + ggplot2::geom_line() + ggplot2::theme_minimal() + ggplot2::xlab('Emission Wavelength (nm)') + ggplot2::ylab('Intensity (a.u)')
+plot_all_gg <- function(df,scans=15){
+  cols <- c('Wavelength',paste('R',seq(1,scans),sep=''))
+  subs <- df[,cols]
+  mdat <- reshape2::melt(subs,id=c('Wavelength'),variable.name = 'Scan', value.name = 'Em')
+  p <- ggplot2::ggplot(mdat,ggplot2::aes(x=Wavelength,y=Em,group=Scan,color=Scan)) + ggplot2::geom_line() + ggplot2::theme_minimal() + ggplot2::xlab('Emission Wavelength (nm)') + ggplot2::ylab('Intensity (a.u)')
 }
 
 #' ggplot the averaged data
@@ -46,9 +47,62 @@ plot_all_gg <- function(df,mean_name='fluo_mean'){
 #' @return ggplot2 plot object
 #' @export
 plot_mean_gg <- function(df,mean_name='fluo_mean'){
-  p <- ggplot2::ggplot(dat,ggplot2::aes(x=Wavelength,y=fluo_mean)) + ggplot2::geom_line() + ggplot2::theme_minimal() + ggplot2::xlab('Emission Wavelength (nm)') + ggplot2::ylab('Intensity (a.u)')
+  p <- ggplot2::ggplot(df,ggplot2::aes_string(x='Wavelength',y=mean_name)) + ggplot2::geom_line() + ggplot2::theme_minimal() + ggplot2::xlab('Emission Wavelength (nm)') + ggplot2::ylab('Intensity (a.u)')
 }
 
+#' ggplot the fits data
+#'
+#' This function prepares a ggplot2 plot of the fits
+#'
+#' @param df dataframe of spectroscopy data imported using caryscan package
+#' @param fit_data dataframe of fits for each peak
+#' @param limits vector of wavelength range for plotting
+#' @return ggplot2 plot object
+#' @export
+plot_fits_gg <- function(dat,fit_data,limits = c(275,400)){
+  fmdat <- reshape2::melt(fit_data,id=c('Wavelength'),variable.name="fit_label", value.name="Em")
+  ggplot(fmdat,aes(x=Wavelength,y=Em,group=fit_label)) +
+    geom_line(aes(colour = fit_label)) +
+    theme_minimal() +
+    xlab('Emission Wavelength (nm)') +
+    ylab('Intentsity (a.u)') +
+    scale_colour_discrete(guide = FALSE) +
+    scale_x_continuous(breaks = seq(275, 400, 25), limits = limits)
+}
+
+#' ggplot the residuals data
+#'
+#' This function prepares a ggplot2 plot of the residuals from the fits
+#'
+#' @param df dataframe of spectroscopy data imported using caryscan package
+#' @param fit_data dataframe of fits for each peak
+#' @param limits vector of wavelength range for plotting
+#' @return ggplot2 plot object
+#' @export
+
+plot_residuals_gg <- function(fit_data,colname='residuals'){
+  res  <- subset(fit_data,Wavelength>280)
+  ggplot(res,aes_string(x='Wavelength',y=colname)) +
+    geom_line() +
+    theme_minimal() +
+    xlab('') +
+    ylab('residuals') +
+    scale_y_continuous(limits = c(-5,5)) +
+    scale_x_continuous(breaks = seq(275, 400, 25), limits = c(275,400))
+}
+
+#' ggplot the main and residuals plots together
+#'
+#' This function prepares a ggplot2 plot of the residuals from the fits
+#'
+#' @param ggplot object for main plot
+#' @param ggplot object for residuals plot
+#' @return ggplot2 plot object
+#' @export
+
+plot_pretty_gg <- function(main_plot,res_plot){
+  gridExtra::grid.arrange(main_plot,res_plot, layout_matrix = rbind(c(1,1),c(1,1),c(2,2)))
+}
 
 
 

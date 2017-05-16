@@ -1,16 +1,21 @@
 Package: caryscan
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Cary Spectrometer Data Importer
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Jonathan Bramble
+Maintainer: The package maintainer <jonathan.bramble@ubc.ca>
+Description: Importing tools for ASCII csv data from Cary Eclipse Spectrometer
+    The csv files are saved on the spectrometer. This package enables rapid plotting of
+    the data collected and also provides a method to add fitted lognormal peaks (currently derived 
+    from an external fitting program). The number of data points and scans must be known
+    before importing data. 
+    TODO: Add internal fitting functions, background subtraction feature
+License: MIT
 Encoding: UTF-8
 LazyData: true
 Imports:
     readr,
     ggplot2,
-    reshape2
+    reshape2,
+    gridExtra
 RoxygenNote: 5.0.1
