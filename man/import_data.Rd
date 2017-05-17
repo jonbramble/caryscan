@@ -18,7 +18,7 @@ import_data(path, filename, skip = 2, nlines = 121, scans = 15)
 \item{scans}{number of scans}
 }
 \value{
-data.frame containing data labled R1..RN where N is the number of scans
+data.frame containing data labelled R1..RN where N is the number of scans
 }
 \description{
 This function imports the data from spectroscopy measurements

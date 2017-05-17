@@ -59,15 +59,17 @@ plot_mean_gg <- function(df,mean_name='fluo_mean'){
 #' @param limits vector of wavelength range for plotting
 #' @return ggplot2 plot object
 #' @export
-plot_fits_gg <- function(dat,fit_data,limits = c(275,400)){
-  fmdat <- reshape2::melt(fit_data,id=c('Wavelength'),variable.name="fit_label", value.name="Em")
-  ggplot(fmdat,aes(x=Wavelength,y=Em,group=fit_label)) +
-    geom_line(aes(colour = fit_label)) +
-    theme_minimal() +
-    xlab('Emission Wavelength (nm)') +
-    ylab('Intentsity (a.u)') +
-    scale_colour_discrete(guide = FALSE) +
-    scale_x_continuous(breaks = seq(275, 400, 25), limits = limits)
+plot_fits_gg <- function(df,fit_data,limits = c(275,400)){
+  fmdat <- reshape2::melt(fit_data,id=c('Wavelength'),variable.name="fit_label",value.name="Em")
+  pdat<-subset(fmdat,fit_label==c('fit_a','fit_b','sum_fits'))
+  ggplot2::ggplot(pdat,ggplot2::aes(x=Wavelength,y=Em,group=fit_label,colour=fit_label)) +
+    ggplot2::geom_line() +
+    ggplot2::geom_point(data=df,ggplot2::aes(x=Wavelength,y=fluo_mean),shape=1,inherit.aes=FALSE) +
+    ggplot2::theme_minimal() +
+    ggplot2::xlab('Emission Wavelength (nm)') +
+    ggplot2::ylab('Intentsity (a.u)') +
+    ggplot2::scale_colour_discrete(guide = FALSE) +
+    ggplot2::scale_x_continuous(breaks = seq(275, 400, 25), limits = limits)
 }
 
 #' ggplot the residuals data
@@ -82,13 +84,13 @@ plot_fits_gg <- function(dat,fit_data,limits = c(275,400)){
 
 plot_residuals_gg <- function(fit_data,colname='residuals'){
   res  <- subset(fit_data,Wavelength>280)
-  ggplot(res,aes_string(x='Wavelength',y=colname)) +
-    geom_line() +
-    theme_minimal() +
-    xlab('') +
-    ylab('residuals') +
-    scale_y_continuous(limits = c(-5,5)) +
-    scale_x_continuous(breaks = seq(275, 400, 25), limits = c(275,400))
+  ggplot2::ggplot(res,ggplot2::aes_string(x='Wavelength',y=colname)) +
+    ggplot2::geom_line() +
+    ggplot2::theme_minimal() +
+    ggplot2::xlab('') +
+    ggplot2::ylab('residuals') +
+    ggplot2::scale_y_continuous(limits = c(-5,5)) +
+    ggplot2::scale_x_continuous(breaks = seq(275, 400, 25), limits = c(275,400))
 }
 
 #' ggplot the main and residuals plots together

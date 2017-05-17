@@ -40,15 +40,5 @@ add_lognorm_fit <- function(df,c,h,w,b){
 #' @param cols names of columns containing fit data #not yet implemented
 #' @export
 sum_fits <- function(fit_data,cols){
-  rowSums(fit_data)
-}
-
-#' fit residuals
-#' calculate the residuals based on the mean and the sum of the fits
-#' @param df dataframe with the spectral data
-#' @param fit_data dataframe with the fit data
-#' @param name column name of the sum of the fits
-#' @export
-fit_residuals <- function(df,fit_data,name='sum_fits'){
-  df[,'fluo_mean']-fit_data[,name]
+  rowSums(fit_data[,cols])
 }

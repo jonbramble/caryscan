@@ -2,11 +2,16 @@
 % Please edit documentation in R/utils.R
 \name{sum_fits}
 \alias{sum_fits}
-\title{add lognormal fit}
+\title{sum fit columns}
 \usage{
-sum_fits(df, cols)
+sum_fits(fit_data, cols)
+}
+\arguments{
+\item{fit_data}{dataframe containing fit data}
+
+\item{cols}{names of columns containing fit data #not yet implemented}
 }
 \description{
-add lognormal fit
+sum fit columns
 }
 

@@ -4,14 +4,14 @@
 \alias{plot_fits_gg}
 \title{ggplot the fits data}
 \usage{
-plot_fits_gg(dat, fit_data, limits = c(275, 400))
+plot_fits_gg(df, fit_data, limits = c(275, 400))
 }
 \arguments{
+\item{df}{dataframe of spectroscopy data imported using caryscan package}
+
 \item{fit_data}{dataframe of fits for each peak}
 
 \item{limits}{vector of wavelength range for plotting}
-
-\item{df}{dataframe of spectroscopy data imported using caryscan package}
 }
 \value{
 ggplot2 plot object
