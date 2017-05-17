@@ -22,6 +22,18 @@ lognormal <- function(lambda,c,h,w,b) {
   return(I)
 }
 
+
+#' normal function
+#'
+#' @param lambda wavelength
+#' @param c mean
+#' @param h height
+#' @param w width
+normal <- function(lambda,c,h,w){
+  I<- h*exp((-log(2))*((lambda-c)/w)^2)
+  return(I)
+}
+
 #' add lognormal fit
 #'
 #' @param lambda wavelength
@@ -32,6 +44,17 @@ lognormal <- function(lambda,c,h,w,b) {
 #' @export
 add_lognorm_fit <- function(df,c,h,w,b){
   sapply(df[,'Wavelength'],lognormal, c,h,w,b)
+}
+
+#' add normal fit
+#'
+#' @param lambda wavelength
+#' @param c mean
+#' @param h height
+#' @param w width
+#' @export
+add_normal_fit <- function(df,c,h,w){
+  sapply(df[,'Wavelength'],normal,c,h,w)
 }
 
 
