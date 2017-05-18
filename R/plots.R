@@ -59,9 +59,9 @@ plot_mean_gg <- function(df,mean_name='fluo_mean'){
 #' @param limits vector of wavelength range for plotting
 #' @return ggplot2 plot object
 #' @export
-plot_fits_gg <- function(df,fit_data,limits = c(275,400)){
+plot_fits_gg <- function(df,fit_data,cols=c('fit_a'),limits = c(275,400)){
   fmdat <- reshape2::melt(fit_data,id=c('Wavelength'),variable.name="fit_label",value.name="Em")
-  pdat<-subset(fmdat,fit_label==c('fit_a','fit_b','sum_fits'))
+  pdat<-subset(fmdat,fit_label==cols)
   ggplot2::ggplot(pdat,ggplot2::aes(x=Wavelength,y=Em,group=fit_label,colour=fit_label)) +
     ggplot2::geom_line() +
     ggplot2::geom_point(data=df,ggplot2::aes(x=Wavelength,y=fluo_mean),shape=1,inherit.aes=FALSE) +

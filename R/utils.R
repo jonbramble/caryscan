@@ -4,8 +4,9 @@
 #' @param path to filename
 #' @export
 write_mean <- function(df,path){
+  full_path <- file.path(path,filename)
   dout <- df[,c('Wavelength','fluo_mean')]
-  utils::write.csv(dout,path,row.names = FALSE)
+  utils::write.csv(dout,full_path,row.names = FALSE)
 }
 
 #' lognormal function
