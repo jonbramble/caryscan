@@ -2,8 +2,9 @@
 #'
 #' @param df dataframe of spectroscopy data imported using caryscan package
 #' @param path to filename
+#' @param filename name of csv file to write to
 #' @export
-write_mean <- function(df,path){
+write_mean <- function(df,path,filename){
   full_path <- file.path(path,filename)
   dout <- df[,c('Wavelength','fluo_mean')]
   utils::write.csv(dout,full_path,row.names = FALSE)
