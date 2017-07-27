@@ -15,6 +15,6 @@ import_data <- function(path,filename,skip=2,nlines=121,scans=15) {
   keep_names <- c('X1',paste('X',seq(2,2*scans,2),sep=''))
   data_subset <- subset(data_import, select=keep_names)
   colnames(data_subset) <- c('Wavelength',paste('R',seq(1,scans),sep=''))
-  data_subset[,'fluo_mean'] <- rowMeans(data_subset[,2:scans+1])
+  data_subset[,'fluo_mean'] <- rowMeans(data_subset[,2:(scans+1)])
   return(data_subset)
 }
